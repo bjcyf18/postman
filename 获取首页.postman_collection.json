@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "181326d4-5e3b-4c7a-ae87-df9e764cfb9d",
+		"name": "获取首页",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "获取主题",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "071c4e31-d73b-4329-92c3-5a27b1d6d032",
+						"exec": [
+							" tests[\"HTTP状态码200\"]=responseCode.code == 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://39.107.96.138:3000/api/v1/topics?page=-1&tab=ask&limit=10&mdrender=true",
+					"protocol": "http",
+					"host": [
+						"39",
+						"107",
+						"96",
+						"138"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"topics"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "-1"
+						},
+						{
+							"key": "tab",
+							"value": "ask"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "mdrender",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "主题详情",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f4a66c75-3154-4dd2-8b68-ca754e7b593a",
+						"exec": [
+							" tests[\"HTTP状态码200\"]=responseCode.code == 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/topic/5e7b6cf4274daa12871941d2",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"topic",
+						"5e7b6cf4274daa12871941d2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
