@@ -23,24 +23,17 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://39.107.96.138:3000/api/v1/topics?page=-1&tab=ask&limit=10&mdrender=true",
-					"protocol": "http",
+					"raw": "{{baseurl}}/topics?page =1&tab=ask&limit=10&mdrender=ture",
 					"host": [
-						"39",
-						"107",
-						"96",
-						"138"
+						"{{baseurl}}"
 					],
-					"port": "3000",
 					"path": [
-						"api",
-						"v1",
 						"topics"
 					],
 					"query": [
 						{
-							"key": "page",
-							"value": "-1"
+							"key": "page ",
+							"value": "1"
 						},
 						{
 							"key": "tab",
@@ -52,7 +45,7 @@
 						},
 						{
 							"key": "mdrender",
-							"value": "true"
+							"value": "ture"
 						}
 					]
 				}
@@ -67,23 +60,107 @@
 					"script": {
 						"id": "f4a66c75-3154-4dd2-8b68-ca754e7b593a",
 						"exec": [
-							" tests[\"HTTP状态码200\"]=responseCode.code == 200;"
+							" tests[\"HTTP状态码200\"]=responseCode.code == 200;",
+							" ",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"helloworld1234\");",
+							"});",
+							"",
+							"pm.test(\"验证是否相等\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.title).to.eql('helloworld1234');",
+							"});",
+							"pm.test(\"验证是否相等\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.author.loginname).to.eql('test83');",
+							"});"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "base",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
 				"url": {
-					"raw": "{{baseurl}}/topic/5e7b6cf4274daa12871941d2",
+					"raw": "{{baseurl}}/topic/5f091efd357c334168d8b0e2",
 					"host": [
 						"{{baseurl}}"
 					],
 					"path": [
 						"topic",
-						"5e7b6cf4274daa12871941d2"
+						"5f091efd357c334168d8b0e2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户详情",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "896de9b3-efdc-4355-a56f-1d375a1328cd",
+						"exec": [
+							" tests[\"HTTP状态码200\"]=responseCode.code == 200;",
+							" ",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"验证是否相等\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.loginname).to.eql('test5');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "base",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/user/test5",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"test5"
 					]
 				}
 			},

@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "9f71b941-bbb7-4d55-8317-900b4fc67d81",
+		"name": "豆瓣",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "标签",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6fc7a044-eae9-4fdf-8670-8fdc63a05c2a",
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://movie.douban.com/j/search_tags?type=movie&tag=%E6%9C%80%E6%96%B0&source=index",
+					"protocol": "https",
+					"host": [
+						"movie",
+						"douban",
+						"com"
+					],
+					"path": [
+						"j",
+						"search_tags"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "movie"
+						},
+						{
+							"key": "tag",
+							"value": "%E6%9C%80%E6%96%B0"
+						},
+						{
+							"key": "source",
+							"value": "index"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "最新电影",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa034516-1dff-43e0-8cb0-7cfbb3284dc1",
+						"exec": [
+							"pm.test(\"查找id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.subjects[0]['id']).to.eql('30489330');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://movie.douban.com/j/search_subjects?type=movie&tag=%E6%9C%80%E6%96%B0&page_limit=50&page_start=0",
+					"protocol": "https",
+					"host": [
+						"movie",
+						"douban",
+						"com"
+					],
+					"path": [
+						"j",
+						"search_subjects"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "movie"
+						},
+						{
+							"key": "tag",
+							"value": "%E6%9C%80%E6%96%B0"
+						},
+						{
+							"key": "page_limit",
+							"value": "50"
+						},
+						{
+							"key": "page_start",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
